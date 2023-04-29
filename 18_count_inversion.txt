@@ -1,0 +1,59 @@
+    long long mergesort(long long arr[],long long low,long long high,int N)
+    {
+        
+        long long count=0;
+        if(low<high)
+        {
+         long long mid=low+(high-low)/2;
+        
+         count+= mergesort(arr,low,mid,N);
+         count+= mergesort(arr,mid+1,high,N);
+         count+= merge(arr,low,mid,high,N);
+         
+        
+        }
+        
+         return count;
+    }
+    
+    long long merge(long long arr[], long long low,long long mid,long long high,int N)
+    {
+        long long i=low;
+        long long  j=mid+1;
+        long long k=low;
+        long long temp[N];
+        long long inv_count=0;
+        
+        while(i<=mid && j<=high)
+        {
+            if(arr[i]<=arr[j])
+            {
+                temp[k++]=arr[i++];
+            }
+            else
+            {
+                temp[k++]=arr[j++];
+                
+                inv_count+=(mid-i+1);
+            }
+        }
+        
+        while(i<=mid)
+        temp[k++]=arr[i++];
+        
+        while(j<=high)
+        temp[k++]=arr[j++];
+        
+        for(int i=low;i<=high;i++)
+        {
+            arr[i]=temp[i];
+        }
+        
+        return inv_count;
+    }
+    long long int inversionCount(long long arr[], long long N)
+    {
+        
+        return mergesort(arr,0,N-1,N);
+    }
+    

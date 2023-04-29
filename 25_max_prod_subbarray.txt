@@ -1,0 +1,53 @@
+class Solution {
+public:
+    int maxProduct(vector<int>& A) {
+        
+        int res=A[0];
+        int curMin=res,curMax=res;
+        for(int i=1;i<A.size();i++)
+        {
+            if(A[i]<0)
+            {
+                swap(curMin,curMax);
+            }
+
+            curMax=max(A[i],A[i]*curMax);
+            curMin=min(A[i],A[i]*curMin);
+            res=max(res,curMax);
+        }
+        return res;
+    }
+};
+
+
+
+
+
+class Solution {
+public:
+    int maxProduct(vector<int>& A) {
+        
+        int curMin=1,curMax=1;
+        int res=*max_element(A.begin(), A.end());
+
+        for(int i=0;i<A.size();i++)
+        {
+
+            if(A[i]==0)
+            {
+                curMin=1;
+                curMax=1;
+                continue;
+            }
+
+            int temp=A[i]*curMin;
+            int temp1=A[i]*curMax;
+
+            curMax=max(A[i],max(temp,temp1));
+            curMin=min(A[i],min(temp,temp1));
+            res=max(res,curMax);
+        }
+
+        return res;
+    }
+};

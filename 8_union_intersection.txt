@@ -1,0 +1,44 @@
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+
+      if(nums2.size()<nums1.size())
+      return intersection(nums2,nums1);
+      vector<int> ans;
+      set<int> s(nums1.begin(),nums1.end());
+      for(int i=0;i<nums2.size();i++)
+      {
+          if(s.find(nums2[i])!=s.end())
+          {
+             ans.push_back(nums2[i]);
+             s.erase(nums2[i]);
+          }
+      }
+
+      return ans;   
+    }
+};
+
+
+class Solution{
+    public:
+    //Function to return the count of number of elements in union of two arrays.
+    int doUnion(int a[], int n, int b[], int m)  {
+        //code here
+        
+        vector<int> ans;
+        unordered_set<int> s(a,a+n);
+        
+        for(int i=0;i<m;i++)
+        {
+            s.insert(b[i]);
+        }
+        
+        for(int num:s)
+        ans.push_back(num);
+        
+        
+        return ans.size();
+        
+    }
+};

@@ -1,0 +1,70 @@
+
+class Solution
+{
+    public:    
+       vector <int> commonElements (int A[], int B[], int C[], int n1, int n2, int n3)
+        {
+            //code here.
+            
+            vector<int> res;
+            
+            int i=0,j=0,k=0;
+            while(i<n1 && j<n2 && k<n3)
+            {
+                if(A[i]==B[j] && B[j]==C[k])
+                {
+                    res.push_back(A[i]);
+                    i++;
+                    j++;
+                    k++;
+                }
+                else if(A[i]<=B[j] && A[i]<=C[k])
+                i++;
+                else if(B[j]<=A[i] && B[j]<=C[k])
+                j++;
+                else
+                k++;
+            }
+            return res;
+        }
+
+};
+
+brute force 
+
+class Solution
+{
+    public:    
+       vector <int> commonElements (int A[], int B[], int C[], int n1, int n2, int n3)
+        {
+            //code here.
+            
+            unordered_set<int> s;
+            unordered_set<int> t;
+            set<int> p;
+            for(int i=0;i<n1;i++)
+            {
+                s.insert(A[i]);
+            }
+            
+            for(int i=0;i<n2;i++)
+            {
+               if(s.find(B[i])!=s.end())
+               {
+                   t.insert(B[i]);
+               }
+            }
+            
+            for(int i=0;i<n3;i++)
+            {
+               if(t.find(C[i])!=t.end())
+               {
+                   p.insert(C[i]);
+               }
+            }
+            vector<int> res(p.begin(),p.end());
+            
+            return res;
+        }
+
+};

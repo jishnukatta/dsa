@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        
+        int a=prices[0],sum=0,res=0;
+        
+        for(int i=1;i<prices.size();i++)
+        {
+            if(prices[i]<a)
+            {
+                a=prices[i];
+                sum=0;
+            }
+            else
+            {
+                sum+=(prices[i]-prices[i-1]);
+                res=max(res,sum);
+            }
+        }
+        return res;
+    }
+};
+
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        
+        
+        int mini=prices[0];
+        int ans=0,res=INT_MIN;
+        for(int i=0;i<prices.size();i++)
+        {
+            ans=prices[i]-mini;
+            
+            res=max(ans,res);
+            mini=min(mini,prices[i]);
+        }
+        return res;
+    }
+};

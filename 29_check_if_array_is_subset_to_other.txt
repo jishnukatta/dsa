@@ -1,0 +1,54 @@
+string isSubset(int a1[], int a2[], int n, int m) {
+    
+    unordered_set<int> s;
+    
+    for(int i=0;i<n;i++)
+    {
+        s.insert(a1[i]);
+    }
+    
+    int size=s.size();
+    
+    for(int i=0;i<m;i++)
+    {
+        s.insert(a2[i]);
+    }
+    
+    if(s.size()==size)
+    return "Yes";
+    
+    return "No";
+    
+}
+
+
+//with duplicates
+
+
+string isSubset(int a1[], int a2[], int n, int m) {
+    
+    if(m>n)
+    return "No";
+    
+    unordered_map<int,int> mp;
+    
+    for(int i=0;i<n;i++)
+    {
+        mp[a1[i]]++;
+    }
+    
+    
+    for(int i=0;i<m;i++)
+    {
+        mp[a2[i]]--;
+    }
+    
+    for(int i=0;i<m;i++)
+    {
+        if(mp.find(a2[i])!=mp.end() && mp[a2[i]]<0)
+        return "No";
+    }
+    return "Yes";
+    
+    
+}

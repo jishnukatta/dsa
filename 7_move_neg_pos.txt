@@ -1,0 +1,29 @@
+#if order doesnt matters solve similar approach as 6th prob
+
+#if order matters
+
+class Solution{
+    public:
+    void segregateElements(int a[],int n)
+    {
+        int low=0;
+        vector<int> neg;
+        for(int i=0;i<n;i++)
+        {
+            if(a[i]>0)
+            {
+                a[low]=a[i];
+                low++;
+            }
+            else if(a[i]<0)
+            {
+                neg.push_back(a[i]);
+            }
+            
+        }
+        for(int num:neg)
+        {
+           a[low++]=num;
+        }
+    }
+};

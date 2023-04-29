@@ -1,0 +1,31 @@
+
+
+
+
+jump game 2 leetcode
+class Solution {
+public:
+
+    int solve(vector<int> &nums,int n,int x,vector<int> &dp)
+    {
+        if(x>=n-1)
+        {
+           return 0;
+        }
+        if(dp[x]!=-1)
+        return dp[x];
+        int mini=100000;
+        for(int i=1;i<=nums[x];i++)
+        {
+            int temp=solve(nums,n,x+i,dp)+1;
+            mini=min(temp,mini);
+        }
+        return dp[x]=mini;
+       
+    }
+    int jump(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> dp(n+1,-1);
+        return solve(nums,n,0,dp);
+    }
+};

@@ -1,0 +1,44 @@
+class Solution {
+public:
+    vector<int> factorial(int N){
+        // code here
+        
+       vector<int> res;
+        int carry =0;
+       // int length=1;
+        
+        res.push_back(1);
+        
+        for(int i=2;i<=N;i++)
+        {
+            
+            multiply(res,i);
+        }
+        
+        reverse(res.begin(),res.end());
+        return res;
+        
+    }
+    
+    void multiply(vector<int>& res,int num)
+    {
+        
+        int carry=0;
+        
+        for(int i=0;i<res.size();i++)
+        {
+            int x=res[i]*num+carry;
+            res[i]=x%10;
+            carry=x/10;
+        }
+        
+        while(carry)
+        {
+            res.push_back(carry%10);
+            carry=carry/10;
+        }
+        
+        
+        
+    }
+};
