@@ -1,0 +1,32 @@
+class Solution {
+    int low,high,maxi=0;
+public:
+    
+    void extendPalindrome(int left,int right,string s)
+    {
+        while(left>=0 && right<s.size() && s[left]==s[right])
+        {
+            if(maxi<right-left+1)
+            {
+                low=left;
+                high=right;
+                maxi=right-left+1;
+            }
+            left--;
+            right++;
+        }
+    }
+    
+    string longestPalindrome(string s) {
+        int n=s.size();
+        for(int i=0;i<s.size();i++)
+        {
+            extendPalindrome(i,i,s);
+            extendPalindrome(i,i+1,s);
+        }
+        
+        
+        return s.substr(low,high-low+1);
+        
+    }
+};

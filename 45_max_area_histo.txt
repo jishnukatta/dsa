@@ -1,0 +1,60 @@
+class Solution {
+public:
+
+    int histo(vector<int> matrix)
+    {
+        int n=matrix.size();
+
+        int res=0;
+          stack<int> st;
+
+        for(int i=0;i<=n;i++)
+        {
+            while(!st.empty() && (i==n || matrix[st.top()] >= matrix[i] ))
+            {
+                int height=matrix[st.top()];
+                st.pop();
+
+                  int width;
+                if(st.empty())
+                width=i;
+                else
+                width=i-st.top()-1;
+
+                res=max(res,width*height);
+                
+            }
+            st.push(i);
+        }
+        return res;
+
+
+
+
+    }
+    int maximalRectangle(vector<vector<char>>& a) {
+        
+
+        int n=a.size();
+        int m=a[0].size();
+         
+         vector<int> prev(m,0);
+         vector<int> temp(m,0);
+        for(int j=0;j<a[0].size();j++)
+        prev[j]=(a[0][j]=='1')?1:0;
+        int res= histo(prev);
+       
+       for(int i=1;i<n;i++)
+       {
+           for(int j=0;j<m;j++)
+            temp[j]=(a[i][j]=='1')?1+prev[j]:0;
+
+           res=max(res,histo(temp));
+       
+           prev=temp;
+       }        
+
+       return res;
+      
+    }
+};

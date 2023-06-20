@@ -1,0 +1,40 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    
+    string s= "12";
+    string t = "xy";
+    
+    string res="x1y2";
+    
+     int l1=s.size();
+     int l2=t.size();
+     
+     int i=0,j=0,k=0;
+     
+     if(l1+l2 < res.size()) { 
+         cout<<"false";
+         return 0;
+     }
+     
+     while(k<res.size())
+     {
+         if(i<l1 && res[k]==s[i])
+         i++;
+         else if(j<l2 && res[k]==t[j])
+         j++;
+		 else 
+		 {
+            cout<<"false"<<endl;
+			return 0;
+		 }
+         
+         k++;
+     }
+     
+     if(i<l1 or j<l2) cout<<"false"<<endl;
+     else
+     cout<<"true"<<endl;
+}

@@ -1,0 +1,24 @@
+#include <iostream>
+
+using namespace std;
+
+void printsubsequence(string s,int i, int n, string t)
+{
+    if(i==n)
+    {
+        cout<<t<<endl;
+    }
+    
+    else
+    {
+        printsubsequence(s,i+1,n,t);
+        printsubsequence(s,i+1,n,t+s[i]);
+    }
+}
+
+
+int main() {
+
+    string s="abc";
+    printsubsequence(s,0,s.size(),"");
+}
