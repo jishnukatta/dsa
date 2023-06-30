@@ -1,0 +1,156 @@
+Memoization
+
+class Solution {
+public:
+
+   bool solve(string &s, unordered_set<string> &dict,int i, vector<int> &dp)
+   {
+
+       if(i==s.size()) return 1;
+
+       if(dp[i]!=-1) return dp[i];
+       string temp;
+
+       for(int j=i;j<s.size();j++)
+       {
+           temp+=s[j];
+
+           if(dict.find(temp)!=dict.end())
+           {
+               if(solve(s,dict,j+1,dp)) return dp[i]=1;
+           }
+       }
+
+       return dp[i]=0;
+      
+   }
+
+    bool wordBreak(string s, vector<string>& wordDict) {
+        
+         unordered_set<string> st;
+
+         for(auto i: wordDict)
+         st.insert(i);
+
+        int n=s.size();
+         vector<int> dp(n,-1);
+         return solve(s,st,0,dp);
+    }
+};
+
+tabulation 
+
+
+class Solution {
+public:
+
+   
+
+    bool wordBreak(string s, vector<string>& wordDict) {
+        
+         int n=s.size();
+        unordered_set<string> st;
+
+         for(auto i: wordDict)
+         st.insert(i);
+         
+         vector<int> dp(n+1,0);
+
+         dp[n]=1;
+         for(int i=n-1;i>=0;i--)
+         {
+             string temp="";
+
+             for(int j=i;j<n;j++)
+             {
+                 temp+=s[j];
+                 if(st.find(temp)!=st.end())
+                 {
+                     if(dp[j+1]==1) dp[i]=1;
+                 }
+             }
+         }
+        return dp[0];
+    }
+};
+
+
+
+
+class Solution {
+public:
+
+   bool solve(string s, unordered_set<string> st,unordered_map<string,bool> dp)
+   {
+       int n=s.size();
+       if(n==0) return 1;
+      
+       for(int i=1;i<=n;i++)
+       {
+           string sub= s.substr(0,i);
+           string rem = s.substr(i,n-i);
+
+           if(st.find(sub)!=st.end() && solve(rem,st,dp)==true) return dp[s]=true;
+           
+       }
+
+       return dp[s]=false;
+   }
+
+    bool wordBreak(string s, vector<string>& wordDict) {
+        
+        unordered_set<string> st;
+
+        for(auto i : wordDict)
+        {
+            st.insert(i);
+        }        
+
+        unordered_map<string,bool> dp;
+
+        return solve(s,st,dp);
+    }
+};
+
+tabulation
+
+class Solution {
+public:
+
+   bool solve(string s, unordered_set<string> &dict)
+   {
+       if(dict.size()==0) return false;
+        
+        vector<bool> dp(s.size()+1,false);
+        dp[0]=true;
+        
+        for(int i=1;i<=s.size();i++)
+        {
+            for(int j=i-1;j>=0;j--)
+            {
+                if(dp[j])
+                {
+                    string word = s.substr(j,i-j);
+                    if(dict.find(word)!= dict.end())
+                    {
+                        dp[i]=true;
+                        break; //next i
+                    }
+                }
+            }
+        }
+        
+        return dp[s.size()];
+   }
+
+    bool wordBreak(string s, vector<string>& wordDict) {
+        
+         unordered_set<string> st;
+
+         for(auto i: wordDict)
+         st.insert(i);
+
+         return solve(s,st);
+    }
+};
+	

@@ -1,0 +1,36 @@
+class Solution{
+  public:
+    vector<vector<string> > Anagrams(vector<string>& s) {
+        //code here
+        
+ 
+        
+        unordered_map<string,vector<string>> mp;
+        
+        for(int i=0;i<s.size();i++)
+        {
+            string t=s[i];
+            sort(t.begin(),t.end());
+            
+            mp[t].push_back(s[i]);
+        }
+        
+        vector<vector<string>> ans(mp.size());
+        
+        
+        int id=0;
+        
+        for(auto x: mp)
+        {
+            vector<string> temp=x.second;
+            
+            for(int i=0;i<temp.size();i++)
+            {
+                ans[id].push_back(temp[i]);
+            }
+            id++;
+        }
+        
+        return ans;
+    }
+};

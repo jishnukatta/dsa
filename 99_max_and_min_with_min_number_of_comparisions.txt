@@ -1,0 +1,28 @@
+ int minimumDeletions(vector<int>& nums) {
+        
+
+        int n=nums.size();
+
+        int min_value=INT_MAX,min_index=0,max_value=INT_MIN,max_index=0;
+        for(int i=1;i<nums.size();i++)
+        {
+             if(max_value < nums[i])
+             {
+                 max_value=nums[i];
+                 max_index=i;
+             }
+             if(min_value > nums[i])
+             {
+                 min_value=nums[i];
+                 min_index=i;
+             }
+        }
+
+        cout<<max_index<<" "<<min_index<<endl;
+
+        
+      return 0;
+
+
+
+    }

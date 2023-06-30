@@ -1,0 +1,46 @@
+bool searchPattern(string str, string pat)
+{
+    
+    
+    
+    int last_occur[256];
+    
+    int m=pat.size();
+    int n=str.size();
+    
+    for(int i=0;i<str.size();i++)
+    {
+        last_occur[(int)str[i]]=i;
+    }
+    
+    int index=0;
+    
+    while(index<=(n-m))
+    {
+        
+        int j=m-1;
+        
+        while(j>=0 && str[index+j]==pat[j])
+        {
+            j--;
+        }
+        
+        if(j<0)
+        {
+           // return true; --for one occurance
+            
+            cout<<"pattern present at index "+index<<endl;
+            
+            //for other occurances
+            
+            index+=(index+m<n)?m-last_occur[str[index+m]]:1;
+        }
+        else
+        {
+            index+=max(1,j-last_occur[str[index+j]]);
+        }
+        
+    }
+    
+    return false;
+}

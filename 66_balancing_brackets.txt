@@ -1,0 +1,64 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        
+         stack<int> st;
+
+         for(int i=0;i<s.size();i++)
+         {
+
+             if(s[i]=='(' || s[i]=='[' || s[i]=='{' )
+             {
+                 st.push(s[i]);
+             }
+
+             else 
+             
+             {
+                  if(st.empty())     //starting closing bracket
+                {
+                 return false;
+                }
+             
+                else if( (st.top()=='(' && s[i]==')') || (st.top() == '{' && s[i]=='}')  
+                || (st.top()=='[' && s[i]==']') ) 
+
+               {
+                 st.pop();
+               }
+
+               else return false;   // above combination in else is not satisfied so not matching closing bracket
+
+             }
+
+
+         }
+
+         if(st.empty())
+         return true;
+
+         return false;
+
+
+    }
+};
+
+
+
+class Solution {
+public:
+    bool isValid(string s) {
+        int i=-1;
+        for(auto& ch:s){
+            if(ch=='(' || ch=='{' || ch=='[')
+                s[++i]=ch;
+            else{
+                if(i>=0 && ((s[i]=='(' && ch==')') || (s[i]=='{' && ch=='}') || (s[i]=='[' && ch==']')))
+                    i--;
+                else
+                    return false;
+            }
+        }
+        return i==-1;
+    }
+};

@@ -1,0 +1,78 @@
+class Solution {
+public:
+    int minChar(string str){
+        //Write your code here
+        string revStr = str;
+    reverse(revStr.begin(), revStr.end());
+     string concat = str + "$" + revStr;
+     vector<int> lps = cal_lps(concat);
+ 
+    return (str.length() - lps.back());
+    }
+    
+    vector<int> cal_lps( string s)
+    {
+        
+        vector<int> lps(s.size());
+        int len = 0;
+ 
+        lps[0] = 0; 
+  
+        int i = 1;
+      while (i < s.size()) 
+      {
+          if (s[i] == s[len]) {
+              len++;
+              lps[i] = len;
+               i++;
+            }
+        else 
+        {
+            if (len != 0) {
+                len = lps[len - 1];
+ 
+                
+            }
+            else 
+            {
+                lps[i] = 0;
+                i++;
+            }
+        }
+      }
+      
+      return lps;
+    }
+};
+
+
+class Solution {
+public:
+    int minChar(string str){
+        //Write your code here
+      
+       
+       
+       int n=str.size();
+       
+       int i=0, j=n-1;
+       int count=0;
+       
+       while(i<j)
+       {
+           if(str[i]==str[j])
+           {
+               i++;
+               j--;
+           }
+           else
+           {
+               count++;
+               i=0;
+               j=n-count-1;
+           }
+       }
+       
+       return count;
+    }
+};

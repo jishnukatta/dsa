@@ -1,0 +1,61 @@
+class Solution
+{
+    public:
+    string rearrangeString(string str)
+    {
+        //code here
+        
+        unordered_map<char,int> mp;
+        char ch;
+        int mx=INT_MIN;
+        
+        for(int i=0;i<str.size();i++)
+        {
+            mp[str[i]]++;
+            if(mp[str[i]]>mx)
+            {
+                mx=mp[str[i]];
+                ch=str[i];
+            }
+        }
+
+        if(mx>(str.size()+1)/2)
+        return "-1";
+        
+        char res[str.size()];
+        
+        
+        int idx=0;
+        while(mp[ch]--)
+        {
+            res[idx]=ch;
+            idx+=2;
+        }
+        
+        mp[ch]=0;
+      
+        for(auto x:mp)
+        {
+            ch=x.first;
+            int count=x.second;
+            
+            while(count--)
+            {
+                idx=(idx>=str.size())?1:idx;
+                
+                res[idx]=ch;
+                idx+=2;
+            }
+        }
+        
+        string t="";
+        for(int i=0;i<str.size();i++)
+       {
+           t+=res[i];
+       }
+       
+       return t;
+        
+    }
+    
+};

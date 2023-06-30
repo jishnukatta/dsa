@@ -1,0 +1,51 @@
+class Solution{
+    public:
+    
+    int solve(vector<vector<char>> &mat, int i, int j, string target, int row_max,int col_max, int index,int tar_size)
+    {
+        int count=0;
+        
+        if(i>=0 && i<=row_max && j>=0 && j<=col_max && mat[i][j]==target[index])
+        {
+            char temp=target[index];
+            
+            index++;
+            
+            mat[i][j]='$';
+            
+            if(index==tar_size)
+            {
+                count=1;
+            }
+            else
+            {
+                count+=solve(mat, i+1,j, target, row_max, col_max, index, tar_size);
+                 count+=solve(mat, i,j+1, target, row_max, col_max, index, tar_size);
+                  count+=solve(mat, i-1,j, target, row_max, col_max, index, tar_size);
+                   count+=solve(mat, i,j-1, target, row_max, col_max, index, tar_size);
+            }
+            
+            mat[i][j]=temp;
+        }
+        
+        return count;
+        
+    }
+    
+    int findOccurrence(vector<vector<char> > &mat, string target){
+        
+        
+        int n=mat.size();
+        int m =mat[0].size();
+        int count=0;
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                count+=solve(mat,i,j,target,n-1,m-1,0,target.size());
+            }
+        }
+        
+        return count;
+    }
